@@ -156,7 +156,7 @@ Além disso, para instalar as dependências de cada parte do projeto, use os seg
 
 ### Backend
 
-1. ⚙️ Configure `.env` com variáveis necessárias (`PORT`, conexão com PostgreSQL, chaves). Além disso Tenha o PostgreSQL instalado na sua máquina e crie manualmente o banco de dados chamado instituto_diomicio antes de iniciar o backend. 
+1. ⚙️ Configure `.env` com variáveis necessárias (`PORT`, conexão com PostgreSQL, chaves). Além disso, Tenha o PostgreSQL instalado na sua máquina e crie manualmente o banco de dados chamado instituto_diomicio antes de iniciar o backend. 
 2. 📥 Instale dependências:  
    ```bash
    # No terminal 1 (Backend)
