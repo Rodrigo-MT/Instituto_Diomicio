@@ -97,7 +97,7 @@ BASE_URL=http://localhost:3000
 # Email SMTP
 MAIL_USER=seuemail@gmail.com
 MAIL_PASS=suasenhaaplicativo
-SMTP_SECRET_KEY=
+SMTP_SECRET_KEY= # ← Adicione uma chave aleatória aqui, uma chave segura e forte é mais recomendado.
 
 # Servidor
 PORT=3000
@@ -114,11 +114,11 @@ ADMIN_USERNAME=admin
 ADMIN_PASSWORD_HASH=  # ← veja abaixo como gerar
 
 # JWT
-JWT_SECRET=
+JWT_SECRET= # ← Adicione uma chave aleatória aqui, uma chave segura e forte é mais recomendado.
 
 # Criptografia de e-mails
-ENCRYPTION_KEY=     # 32 caracteres
-ENCRYPTION_IV=      # 16 caracteres
+ENCRYPTION_KEY=     # ← Adicione uma chave de 32 Caracteres exatos aqui
+ENCRYPTION_IV=      # ← Adicione uma chave de 16 Caracteres exatos aqui
 ```
 
 ### 🔐 Como gerar o hash da senha do admin
