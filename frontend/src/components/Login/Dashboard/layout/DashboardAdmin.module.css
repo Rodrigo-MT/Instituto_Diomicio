@@ -1,0 +1,1454 @@
+/* Cores do Tema */
+:root {
+  --primary-green: #bee7cf;
+  --secondary-green: #f8fcf7;
+  --accent-green: #45b29a;
+  --text-color: #233567;
+  --bg-light: #f9f9f9;
+}
+
+.dashboardContainer {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--secondary-green);
+}
+
+.sidebar {
+  width: 250px;
+  background-color: white;
+  padding: 1rem;
+  border-right: 1px solid var(--primary-green);
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--text-color);
+  border-left: 3px solid transparent;
+}
+
+.navButton:hover {
+  background-color: var(--primary-green);
+  border-left: 3px solid var(--accent-green);
+}
+
+.navIcon {
+  font-size: 1.2rem;
+  margin-right: 1rem;
+}
+
+.navText {
+  font-size: 1rem;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 2rem;
+  background-color: var(--bg-light);
+}
+
+.title {
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: var(--accent-green);
+  margin: 0.5rem auto 0;
+}
+
+.welcomeText {
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 3rem;
+}
+
+
+/* Estilos específicos para EventosAdmin */
+.eventosContainer {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.eventosHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.sectionTitle {
+  color: var(--text-color);
+  font-size: 1.5rem;
+  margin: 0;
+  position: relative;
+}
+
+.sectionTitle::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 3px;
+  background: var(--accent-green);
+  margin-top: 0.5rem;
+}
+
+.addButton {
+  background-color: var(--accent-green);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s;
+}
+
+.addButton:hover {
+  background-color: #3a9e88;
+}
+
+.eventosTable {
+  border: 1px solid var(--primary-green);
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.tableHeader {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  background-color: var(--primary-green);
+  font-weight: 600;
+  color: var(--text-color);
+}
+
+.headerCell {
+  padding: 1rem;
+  text-align: left;
+}
+
+.tableRow {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  border-bottom: 1px solid var(--primary-green);
+  transition: background-color 0.2s;
+}
+
+.tableRow:last-child {
+  border-bottom: none;
+}
+
+.tableRow:hover {
+  background-color: var(--secondary-green);
+}
+
+.tableCell {
+  padding: 1rem;
+  display: flex;
+  align-items: center;
+  color: var(--text-color);
+}
+
+.actionsCell {
+  display: flex;
+  gap: 0.5rem;
+  padding: 1rem;
+}
+
+.editButton {
+  background-color: var(--primary-green);
+  color: var(--text-color);
+  border: none;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.editButton:hover {
+  background-color: #a8dcc2;
+}
+
+.deleteButton{
+  background-color: #ffebee;
+  color: #c62828;
+  border: none;
+  padding: 0.3rem 0.8rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  left: 5 px;
+}
+
+.deleteButton:hover {
+  background-color: #ffcdd2;
+}
+
+
+/* Modal Styles */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.confirmationModal, .eventoModal {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.eventoModal {
+  max-width: 600px;
+  max-height: 600px;
+  overflow: scroll;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: color 0.2s;
+}
+
+.closeButton:hover {
+  color: var(--accent-green);
+}
+
+.modalButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.cancelButton {
+  background-color: #f5f5f5;
+  color: var(--text-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cancelButton:hover {
+  background-color: #e0e0e0;
+}
+
+.confirmButton {
+  background-color: #ff5252;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.confirmButton:hover {
+  background-color: #ff3232;
+}
+
+/* Form Styles */
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.formGroup input,
+.formGroup textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: var(--accent-green);
+}
+
+.formGroup textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Button Styles */
+.createButton {
+  background-color: var(--accent-green);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.createButton:hover:not(.disabledButton) {
+  background-color: #3a9e88;
+}
+
+.disabledButton {
+  background-color: #bdbdbd;
+  cursor: not-allowed;
+  position: relative;
+}
+
+.lockIcon {
+  margin-right: 0.5rem;
+}
+
+.saveButton {
+  background-color: var(--text-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.saveButton:hover {
+  background-color: #1a2a4a;
+}
+
+/* Tooltip para botão desabilitado */
+.createButton.disabledButton:hover::after {
+  content: "Você está editando um evento existente";
+  position: absolute;
+  top: -40px;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: var(--text-color);
+  color: white;
+  padding: 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+  white-space: nowrap;
+  z-index: 10;
+}
+
+/* Estilos para upload de imagem */
+.imageUploadContainer {
+  margin-bottom: 2rem;
+}
+
+.imagePreview {
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 2px dashed var(--primary-green);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: border-color 0.3s;
+}
+
+.imagePreview:hover {
+  border-color: var(--accent-green);
+}
+
+.uploadPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.uploadControls {
+  display: flex;
+  gap: 1rem;
+}
+
+.uploadButton {
+  background-color: var(--primary-green);
+  color: var(--text-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.3s;
+}
+
+.uploadButton:hover {
+  background-color: #a8dcc2;
+}
+
+.removeImageButton {
+  background-color: #ffebee;
+  color: #c62828;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.removeImageButton:hover {
+  background-color: #ffcdd2;
+}
+
+/* Ajustes para ícones nos botões */
+.editButton, .deleteButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Estilo para o botão de logout */
+.logoutButton {
+  margin-top: auto; /* Empurra o botão para o final da sidebar */
+  background-color: transparent;
+  transition: background-color 0.3s;
+}
+
+.logoutButton:hover {
+  background-color: rgba(255, 99, 71, 0.1); /* Vermelho bem suave */
+}
+
+.logoutButton .navIcon {
+  color: #ff6347; /* Cor laranja-vermelho para o ícone */
+}
+/* Botão adicionar */
+.addButton {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-bottom: 20px;
+}
+
+.addButton:hover {
+  background-color: #45a049;
+}
+
+/* Modal */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+}
+
+.modalContent {
+  background: white;
+  padding: 30px;
+  border-radius: 8px;
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+}
+
+.closeButton {
+  position: absolute;
+  top: 10px;
+  right: 15px;
+  font-size: 24px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+.modalForm input,
+.modalForm textarea,
+.modalForm button {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 8px;
+  font-size: 16px;
+}
+
+.modalForm textarea {
+  resize: vertical;
+}
+.produtoImagem {
+  width: 5cm;
+  height: 5cm;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.gridLayout{
+  display: flex;
+  margin: 1px;
+}
+.card{
+  margin: 2px;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+/* Newsletter Styles */
+.contentContainer {
+  background-color: white;
+  border-radius: 8px;
+  padding: 2rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+  margin-bottom: 2rem;
+}
+
+.smtpSection {
+  background-color: var(--secondary-green);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--primary-green);
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.smtpSection h3 {
+  color: var(--text-color);
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-size: 1.25rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.smtpSection h3::before {
+  content: "✉️";
+  font-size: 1.2rem;
+}
+
+.smtpSection p {
+  background-color: #fff8e1;
+  padding: 0.75rem;
+  border-radius: 4px;
+  border-left: 4px solid #ffa000;
+  margin: 1rem 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+.smtpSection label {
+  display: block;
+  margin: 1rem 0 0.5rem;
+  color: var(--text-color);
+  font-weight: 500;
+  font-size: 0.95rem;
+}
+
+/* Layout */
+.splitLayout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-top: 1rem;
+}
+
+@media (max-width: 900px) {
+  .splitLayout {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Form Sections */
+.formSection, .listSection {
+  background-color: var(--secondary-green);
+  padding: 1.5rem;
+  border-radius: 8px;
+  border: 1px solid var(--primary-green);
+}
+
+.formSection h3, .listSection h3 {
+  color: var(--text-color);
+  margin-top: 0;
+  margin-bottom: 1.5rem;
+  font-size: 1.25rem;
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.formSection h3::before {
+  content: "📧";
+}
+
+.listSection h3::before {
+  content: "👥";
+}
+
+/* Form Elements */
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.input, .textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  margin-top: 0.5rem;
+  background-color: white;
+}
+
+.input:disabled, .textarea:disabled {
+  background-color: #f5f5f5;
+  color: #777;
+}
+
+.input:focus, .textarea:focus {
+  outline: none;
+  border-color: var(--accent-green);
+  box-shadow: 0 0 0 2px rgba(69, 178, 154, 0.2);
+}
+
+.textarea {
+  min-height: 150px;
+  resize: vertical;
+}
+
+/* Buttons */
+.button {
+  background-color: var(--accent-green);
+  color: white;
+  border: none;
+  padding: 0.75rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: 5px;
+  font-weight: 500;
+  transition: all 0.3s;
+  align-self: flex-start;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.button:hover:not(:disabled) {
+  background-color: #3a9e88;
+  transform: translateY(-1px);
+}
+
+.button:disabled {
+  background-color: #bdbdbd;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+.button::before {
+  content: "";
+  display: inline-block;
+  width: 16px;
+  height: 16px;
+  background-size: contain;
+}
+
+/* Specific buttons */
+.button[onClick*="ConfigureSMTP"]::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z'/%3E%3C/svg%3E");
+}
+
+.button[onClick*="EditSMTP"]::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='white'%3E%3Cpath d='M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z'/%3E%3C/svg%3E");
+}
+
+.selectAllBtn {
+  background-color: var(--primary-green);
+  color: var(--text-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+  transition: all 0.3s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.selectAllBtn:hover {
+  background-color: #a8dcc2;
+  transform: translateY(-1px);
+}
+
+.selectAllBtn::before {
+  content: "✓";
+  font-weight: bold;
+}
+
+/* List Styles */
+.subscriberList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  max-height: 400px;
+  overflow-y: auto;
+  background-color: white;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.subscriberItem {
+  padding: 0.75rem 1rem;
+  border-bottom: 1px solid #eee;
+  transition: background-color 0.2s;
+}
+
+.subscriberItem:last-child {
+  border-bottom: none;
+}
+
+.subscriberItem:hover {
+  background-color: #f5f5f5;
+}
+
+.subscriberItem label {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: color 0.2s;
+  font-size: 0.95rem;
+}
+
+.subscriberItem label:hover {
+  color: var(--accent-green);
+}
+
+.subscriberItem input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  accent-color: var(--accent-green);
+  cursor: pointer;
+  flex-shrink: 0;
+}
+
+/* Messages */
+.errorMsg {
+  color: #d32f2f;
+  background-color: #ffebee;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin: 1rem 0;
+  border-left: 4px solid #d32f2f;
+}
+
+.successMsg {
+  color: #2e7d32;
+  background-color: #e8f5e9;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin: 1rem 0;
+  border-left: 4px solid #2e7d32;
+}
+
+.smtpSuccessMsg {
+  color: #1565c0;
+  background-color: #e3f2fd;
+  padding: 0.75rem;
+  border-radius: 4px;
+  margin: 1rem 0;
+  border-left: 4px solid #1565c0;
+}
+
+/* Scrollbar */
+.subscriberList::-webkit-scrollbar {
+  width: 8px;
+}
+
+.subscriberList::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 4px;
+}
+
+.subscriberList::-webkit-scrollbar-thumb {
+  background: var(--primary-green);
+  border-radius: 4px;
+}
+
+.subscriberList::-webkit-scrollbar-thumb:hover {
+  background: #a8dcc2;
+}
+
+/* Status Indicator */
+.smtpStatus {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  background-color: #e8f5e9;
+  color: #2e7d32;
+}
+
+.smtpStatus::before {
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #2e7d32;
+}
+
+/* Adicione estas regras ao seu DashboardAdmin.module.css */
+
+/* Estilos específicos para ProdutosAdmin - mantendo o mesmo visual de Eventos */
+.produtosContainer {
+  background-color: white;
+  border-radius: 8px;
+  padding: 1.5rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+
+.produtosHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+/* Grid de Produtos */
+.produtosGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+}
+
+.produtoCard {
+  border: 1px solid var(--primary-green);
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+  background-color: white;
+}
+
+.produtoCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.produtoImagemContainer {
+  height: 200px;
+  overflow: hidden;
+  position: relative;
+}
+
+.produtoImagem {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s;
+}
+
+.produtoCard:hover .produtoImagem {
+  transform: scale(1.05);
+}
+
+.produtoInfo {
+  padding: 1.2rem;
+}
+
+.produtoNome {
+  font-size: 1.1rem;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.produtoPreco {
+  font-size: 1.2rem;
+  color: var(--accent-green);
+  font-weight: 700;
+  margin-bottom: 0.8rem;
+}
+
+.produtoDescricao {
+  color: #555;
+  font-size: 0.9rem;
+  margin-bottom: 1.2rem;
+  line-height: 1.5;
+}
+
+.produtoActions {
+  display: flex;
+  gap: 0.5rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--primary-green);
+}
+
+/* Modal de Produto - mantendo o mesmo estilo de Eventos */
+.produtoModal .formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.produtoModal .formGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.produtoModal .formGroup input,
+.produtoModal .formGroup textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.produtoModal .formGroup input:focus,
+.produtoModal .formGroup textarea:focus {
+  outline: none;
+  border-color: var(--accent-green);
+}
+
+.produtoModal .formGroup textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Ajustes para os botões de ação nos cards */
+.produtoCard .editButton,
+.produtoCard .deleteButton {
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+}
+
+/* Estilo para o preço */
+.precoLabel {
+  font-weight: 600;
+  color: var(--text-color);
+  margin-right: 0.3rem;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .produtosGrid {
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+  }
+}
+
+@media (max-width: 480px) {
+  .produtosHeader {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+  
+  .produtosGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Estilos para upload de imagem - similar ao da página de eventos */
+.imageUploadContainer {
+  margin-bottom: 2rem;
+}
+
+.imagePreview {
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 2px dashed var(--primary-green);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: border-color 0.3s;
+}
+
+.imagePreview:hover {
+  border-color: var(--accent-green);
+}
+
+.uploadPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.uploadControls {
+  display: flex;
+  gap: 1rem;
+}
+
+.uploadButton {
+  background-color: var(--primary-green);
+  color: var(--text-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.3s;
+}
+
+.uploadButton:hover {
+  background-color: #a8dcc2;
+}
+
+.removeImageButton {
+  background-color: #ffebee;
+  color: #c62828;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.removeImageButton:hover {
+  background-color: #ffcdd2;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* Adicione estas classes ao seu arquivo CSS existente */
+
+.actionsContainer {
+  margin-bottom: 2rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.generateButton {
+  background-color: #4a6fa5;
+  color: white;
+}
+
+.generateButton:hover {
+  background-color: #3a5a8f;
+}
+
+.generateButton:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
+}
+
+.noticesContainer {
+  margin-top: 2rem;
+}
+
+.instructions {
+  color: #666;
+  font-size: 0.9rem;
+  margin-bottom: 1rem;
+}
+
+.noticesList {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.noticeCard {
+  background: white;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.2s ease;
+}
+
+.noticeCard.predefined {
+  border-left: 4px solid #4a6fa5;
+}
+
+.noticeCard:hover {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.noticeHeader {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+.noticeOrder {
+  background: #f0f0f0;
+  padding: 0.3rem 0.6rem;
+  border-radius: 4px;
+  font-weight: bold;
+  font-size: 0.9rem;
+}
+
+.noticeImage {
+  margin-bottom: 1rem;
+}
+
+.noticeImage img {
+  max-width: 100%;
+  max-height: 200px;
+  border-radius: 4px;
+  object-fit: cover;
+}
+
+.noticeMeta {
+  margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+}
+
+.noticeMeta p {
+  margin: 0.5rem 0;
+}
+
+.predefinedBadge {
+  display: inline-block;
+  background: #e6f2ff;
+  color: #4a6fa5;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.manualBadge {
+  display: inline-block;
+  background: #f0f0f0;
+  color: #666;
+  padding: 0.2rem 0.5rem;
+  border-radius: 4px;
+  font-size: 0.8rem;
+}
+
+.noticeActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.editButton {
+  background-color: #4a6fa5;
+  color: white;
+}
+
+.deleteButton {
+  background-color: #e74c3c;
+  color: white;
+}
+
+.emptyState {
+  padding: 2rem;
+  text-align: center;
+  background: #f9f9f9;
+  border-radius: 8px;
+  color: #666;
+}
+
+/* Adicione estes estilos para o drag and drop */
+[data-rbd-drag-handle-context-id] {
+  cursor: grab;
+}
+
+[data-rbd-draggable-context-id] {
+  user-select: none;
+}
+
+[data-rbd-draggable-context-id][data-rbd-draggable-id]:active {
+  cursor: grabbing;
+}
+
+[data-rbd-draggable-context-id][data-rbd-draggable-id]:focus {
+  outline: none;
+}
+
+.primaryButton {
+  background-color: var(--accent-green); /* #45b29a */
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  width: auto;
+  min-width: 180px;
+  text-align: center;
+}
+
+.primaryButton:hover {
+  background-color: #3a9e88; /* Tom 10% mais escuro */
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.primaryButton:active {
+  transform: translateY(0);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.primaryButton:disabled {
+  background-color: #bdbdbd;
+  cursor: not-allowed;
+  opacity: 0.8;
+}
+
+/* Modal de Edição */
+.editModalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+.editModal {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 600px;
+  position: relative;
+  animation: slideUp 0.3s ease;
+}
+
+.editModalHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--primary-green);
+}
+
+.editModalTitle {
+  color: var(--text-color);
+  margin: 0;
+  font-size: 1.5rem;
+}
+
+.editModalClose {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  cursor: pointer;
+  color: #666;
+  transition: color 0.2s;
+}
+
+.editModalClose:hover {
+  color: var(--accent-green);
+}
+
+/* Botões de Ação no Modal */
+.modalActions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #eee;
+}
+
+.dangerButton {
+  background-color: #e74c3c;
+  color: white;
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.dangerButton:hover {
+  background-color: #c0392b;
+}
+
+.secondaryButton {
+  background-color: #f5f5f5;
+  color: var(--text-color);
+  border: none;
+  padding: 0.75rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 500;
+  transition: all 0.3s;
+}
+
+.secondaryButton:hover {
+  background-color: #e0e0e0;
+}
+
+/* Animações */
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+
+.noticeActions {
+  display: flex;
+  gap: 0.75rem;
+  margin-top: 1rem;
+}
+
+.editButton {
+  background-color: var(--accent-green);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.editButton:hover {
+  background-color: #3a9e88;
+  transform: translateY(-1px);
+}
+
+.deleteButton {
+  background-color: #f5f5f5;
+  color: #e74c3c;
+  border: 1px solid #e74c3c;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s;
+}
+
+.deleteButton:hover {
+  background-color: #ffebee;
+  transform: translateY(-1px);
+}
