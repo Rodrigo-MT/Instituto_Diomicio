@@ -1,0 +1,132 @@
+/* Cores do Tema */
+:root {
+  --primary-green: #bee7cf;
+  --secondary-green: #f8fcf7;
+  --accent-green: #45b29a;
+  --text-dark: #233567;
+  --bg-light: #f9f9f9;
+}
+
+/* Estrutura Principal */
+.aboutSection {
+  padding: 2rem 0;
+  background: var(--bg-light);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.title {
+  text-align: center;
+  color: var(--text-dark);
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: var(--accent-green);
+  margin: 0.5rem auto 0;
+}
+
+/* Layout Integrado */
+.mainWrapper {
+  display: grid;
+  grid-template-columns: 250px 1fr;
+  gap: 1rem;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 3px 15px rgba(0,0,0,0.1);
+}
+
+@media (max-width: 768px) {
+  .mainWrapper {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Painel de Navegação */
+.navPanel {
+  background: var(--secondary-green);
+  padding: 1.5rem;
+  margin: 1rem; /* Margem externa */
+  width: 250px;
+  height: min-content;
+  position: sticky;
+  border-radius: 2px; /* Bordas mais suaves */
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  border: 1px solid rgba(0,0,0,0.05); /* Linha sutil externa */
+}
+
+
+.menuButton {
+  padding: 0.8rem 1rem;
+  margin: 0 0.5rem;
+  border: none;
+  border-radius: 5px;
+  background: white;
+  color: var(--text-dark);
+  text-align: left;
+  cursor: pointer;
+  transition: all 0.3s;
+  font-weight: 500;
+  position: relative;
+}
+
+.menuButton:hover {
+  transform: translateX(5px);
+  background: var(--primary-green);
+}
+
+.menuButton.active {
+  background: var(--accent-green);
+  color: white;
+  font-weight: 600;
+  padding-left: 1.2rem;
+}
+
+.menuButton.active::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 4px;
+  background: white;
+}
+
+/* Área de Conteúdo Integrado */
+.contentArea {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: white;
+  border-left: 1px solid var(--primary-green);
+  margin-left: 1rem;
+
+}
+
+.textDisplay {
+  padding: 2rem;
+  overflow-y: auto;
+  max-height: 500px;
+  border-right: 1px solid var(--primary-green);
+}
+
+.textDisplay p {
+  line-height: 1.7;
+  color: var(--text-dark);
+}
+
+/* Slider Integrado (sem caixa adicional) */
+.sliderContainer {
+  height: 100%;
+}

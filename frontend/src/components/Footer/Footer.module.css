@@ -1,0 +1,120 @@
+.footer {
+    background: linear-gradient(to top, #bee7cf 90%, #f9f9f9); /* Cor do banner */
+    color: #233567; /* Cor do texto */
+    padding: 3rem 0 1rem;
+    font-family: 'Arial', sans-serif;
+    position: relative;
+    z-index: 10;
+  }
+  
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
+  }
+  
+  .topSection {
+    display: grid;
+    grid-template-columns: 1fr 1fr 2fr;
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+  
+  .logoContainer {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logo {
+    width: 120px; /* Tamanho aumentado */
+    height: auto;
+  }
+  
+  .linksTitle, .contactTitle {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: 600;
+    border-bottom: 2px solid #45b29a;
+    padding-bottom: 0.5rem;
+    display: inline-block;
+  }
+  
+  .linksList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .linksList li {
+    margin-bottom: 0.8rem;
+  }
+  
+  .link {
+    color: #233567;
+    text-decoration: none;
+    transition: color 0.3s;
+    font-weight: 500;
+  }
+  
+  .link:hover {
+    color: #45b29a;
+  }
+  
+  .contactList {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .contactList li {
+    margin-bottom: 0.8rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  
+  .contactIcon {
+    min-width: 20px;
+  }
+  
+  .bottomSection {
+    border-top: 1px solid rgba(35, 53, 103, 0.1);
+    padding-top: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .socialLink {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #233567;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  .socialLink:hover {
+    color: #45b29a;
+  }
+  
+  .credits {
+    text-align: center;
+    font-size: 0.9rem;
+  }
+  
+  .credits p {
+    margin: 0.3rem 0;
+  }
+  
+  /* Responsividade */
+  @media (max-width: 768px) {
+    .topSection {
+      grid-template-columns: 1fr;
+      gap: 1.5rem;
+    }
+    
+    .logo {
+      margin: 0 auto;
+    }
+  }

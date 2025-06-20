@@ -1,0 +1,168 @@
+/* Estilo base */
+.newsletterSection {
+    background: linear-gradient(135deg, #e8f5f1 0%, #d0ece4 100%);
+    padding: 3rem 0 4rem; /* Reduzido de 6rem/8rem */
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 4rem;
+  }
+  
+  /* Onda decorativa */
+  .waveTop{
+    position: absolute;
+    left: 0;
+    width: 100%;
+    height: 100px;
+    background: url('data:image/svg+xml;utf8,<svg viewBox="0 0 1200 120" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="none"><path d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113-14.29,1200,52.47V0Z" fill="%23f8f9fa" opacity=".25"/><path d="M0,0V15.81C13,36.92,27.64,56.86,47.69,72.05,99.41,111.27,165,111,224.58,91.58c31.15-10.15,60.09-26.07,89.67-39.8,40.92-19,84.73-46,130.83-49.67,36.26-2.85,70.9,9.42,98.6,31.56,31.77,25.39,62.32,62,103.63,73,40.44,10.79,81.35-6.69,119.13-24.28s75.16-39,116.92-43.05c59.73-5.85,113.28,22.88,168.9,38.84,30.2,8.66,59,6.17,87.09-7.5,22.43-10.89,48-26.93,60.65-49.24V0Z" fill="%23f8f9fa" opacity=".5"/><path d="M0,0V5.63C149.93,59,314.09,71.32,475.83,42.57c43-7.64,84.23-20.12,127.61-26.46,59-8.63,112.48,12.24,165.56,35.4C827.93,77.22,886,95.24,951.2,90c86.53-7,172.46-45.71,248.8-84.81V0Z" fill="%23f8f9fa"/></svg>') no-repeat;
+    background-size: cover;
+  }
+
+  .waveTop {
+    top: -1px;
+  }
+
+  .newsletterSection::after {
+    content: '';
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 75px; /* Reduzido de 150px */ /* Altura do degradê */
+    background: linear-gradient(
+      to bottom, 
+      rgba(249, 249, 249, 0) 0%,   /* Transparente */
+      rgba(249, 249, 249, 1) 100%   /* Cor exata do fundo (#f9f9f9) */
+    );
+    pointer-events: none;
+  }
+
+
+  /* Conteúdo central */
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 0 2rem;
+    position: relative;
+    z-index: 2;
+  }
+  
+  .title {
+    color: #233567;
+    font-size: 2rem; /* Reduzido de 2.5rem */
+    margin-bottom: 0.75rem; /* Reduzido de 1.5rem */
+    font-weight: 700;
+    text-align: center;
+  }
+  
+  .titleHighlight {
+    background: linear-gradient(90deg, #45b29a 0%, #233567 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+    display: inline-block;
+  }
+  
+  .description {
+    color: #233567;
+    font-size: 0.9rem; /* Reduzido de 1.2rem */
+    line-height: 1.6;
+    text-align: center;
+    max-width: 600px;
+    margin: 0 auto 1.5rem;
+  }
+  
+  /* Formulário */
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+  
+  .inputWrapper {
+    position: relative;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 0.6rem 1rem 0.6rem 2rem; /* Reduzido */
+    border: 2px solid #bee7cf;
+    border-radius: 50px;
+    font-size: 0.9rem;
+    background: white;
+    box-shadow: 0 4px 15px rgba(69, 178, 154, 0.1);
+    transition: all 0.3s;
+  }
+  
+  .input:focus {
+    border-color: #59c4ad;
+    box-shadow: 0 4px 20px rgba(69, 178, 154, 0.2);
+    outline: none;
+  }
+  
+  .emailIcon {
+    position: absolute;
+    left: 0.8rem; /* Ajuste para ícone */
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    fill: #45b29a;
+    opacity: 0.7;
+  }
+  
+  .button {
+    background: linear-gradient(135deg, #233567 0%, #315b96 100%);
+    color: white;
+    border: none;
+    padding: 0.6rem 1.5rem; /* Reduzido */
+    border-radius: 50px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    box-shadow: 0 4px 15px rgba(69, 178, 154, 0.3);
+    transition: all 0.3s;
+    margin-top: 1rem;
+  }
+  
+  .button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(69, 178, 154, 0.4);
+  }
+  
+  .arrowIcon {
+    width: 18px;
+    height: 18px;
+    fill: white;
+  }
+  
+  /* Mensagem de sucesso */
+  .successMessage {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    max-width: 500px;
+    margin: 0 auto;
+    box-shadow: 0 4px 20px rgba(69, 178, 154, 0.15);
+    border-left: 4px solid #45b29a;
+  }
+  
+  .checkIcon {
+    width: 24px;
+    height: 24px;
+    fill: #45b29a;
+    flex-shrink: 0;
+  }
+  
+  .successMessage span {
+    color: #233567;
+    font-weight: 500;
+  }
