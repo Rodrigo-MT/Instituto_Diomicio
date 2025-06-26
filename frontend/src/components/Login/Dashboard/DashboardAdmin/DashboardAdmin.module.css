@@ -1,0 +1,338 @@
+/* Cores do Tema */
+:root {
+  --primary-green: #bee7cf;
+  --secondary-green: #f8fcf7;
+  --accent-green: #45b29a;
+  --text-color: #233567;
+  --bg-light: #f9f9f9;
+}
+
+/* Layout Principal */
+.dashboardContainer {
+  display: flex;
+  min-height: 100vh;
+  background-color: var(--secondary-green);
+}
+
+.sidebar {
+  width: 250px;
+  background-color: white;
+  padding: 1rem;
+  border-right: 1px solid var(--primary-green);
+}
+
+.navButton {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 0.5rem;
+  border: none;
+  background: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: var(--text-color);
+  border-left: 3px solid transparent;
+}
+
+.navButton:hover {
+  background-color: var(--primary-green);
+  border-left: 3px solid var(--accent-green);
+}
+
+.navIcon {
+  font-size: 1.2rem;
+  margin-right: 1rem;
+}
+
+.navText {
+  font-size: 1rem;
+}
+
+.mainContent {
+  flex: 1;
+  padding: 2rem;
+  background-color: var(--bg-light);
+}
+
+.title {
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.title::after {
+  content: '';
+  display: block;
+  width: 80px;
+  height: 3px;
+  background: var(--accent-green);
+  margin: 0.5rem auto 0;
+}
+
+.welcomeText {
+  text-align: center;
+  color: var(--text-color);
+  margin-bottom: 3rem;
+}
+
+/* Estilos globais para modais e formulários (compartilhados entre páginas) */
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(5px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.confirmationModal, .eventoModal {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 8px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  width: 90%;
+  max-width: 500px;
+  position: relative;
+  animation: slideUp 0.3s ease;
+}
+
+@keyframes slideUp {
+  from { transform: translateY(20px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
+}
+
+.eventoModal {
+  max-width: 600px;
+  max-height: 600px;
+  overflow: scroll;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-color);
+  transition: color 0.2s;
+}
+
+.closeButton:hover {
+  color: var(--accent-green);
+}
+
+.modalButtons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 2rem;
+}
+
+.cancelButton {
+  background-color: #f5f5f5;
+  color: var(--text-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.cancelButton:hover {
+  background-color: #e0e0e0;
+}
+
+.confirmButton {
+  background-color: #ff5252;
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.confirmButton:hover {
+  background-color: #ff3232;
+}
+
+/* Form Styles */
+.formGroup {
+  margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: var(--text-color);
+  font-weight: 500;
+}
+
+.formGroup input,
+.formGroup textarea {
+  width: 100%;
+  padding: 0.75rem;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 1rem;
+  transition: border-color 0.2s;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: var(--accent-green);
+}
+
+.formGroup textarea {
+  min-height: 100px;
+  resize: vertical;
+}
+
+/* Button Styles */
+.createButton {
+  background-color: var(--accent-green);
+  color: white;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.createButton:hover:not(.disabledButton) {
+  background-color: #3a9e88;
+}
+
+.disabledButton {
+  background-color: #bdbdbd;
+  cursor: not-allowed;
+  position: relative;
+}
+
+.lockIcon {
+  margin-right: 0.5rem;
+}
+
+.saveButton {
+  background-color: var(--text-color);
+  color: white;
+  border: none;
+  padding: 0.5rem 1.5rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.saveButton:hover {
+  background-color: #1a2a4a;
+}
+
+/* Estilos para upload de imagem */
+.imageUploadContainer {
+  margin-bottom: 2rem;
+}
+
+.imagePreview {
+  width: 100%;
+  height: 200px;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  border: 2px dashed var(--primary-green);
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  transition: border-color 0.3s;
+}
+
+.imagePreview:hover {
+  border-color: var(--accent-green);
+}
+
+.uploadPlaceholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: var(--text-color);
+  opacity: 0.7;
+}
+
+.uploadControls {
+  display: flex;
+  gap: 1rem;
+}
+
+.uploadButton {
+  background-color: var(--primary-green);
+  color: var(--text-color);
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  transition: background-color 0.3s;
+}
+
+.uploadButton:hover {
+  background-color: #a8dcc2;
+}
+
+.removeImageButton {
+  background-color: #ffebee;
+  color: #c62828;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.removeImageButton:hover {
+  background-color: #ffcdd2;
+}
+
+/* Ajustes para ícones nos botões */
+.editButton, .deleteButton {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Estilo para o botão de logout */
+.logoutButton {
+  margin-top: auto;
+  background-color: transparent;
+  transition: background-color 0.3s;
+}
+
+.logoutButton:hover {
+  background-color: rgba(255, 99, 71, 0.1);
+}
+
+.logoutButton .navIcon {
+  color: #ff6347;
+}

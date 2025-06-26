@@ -1,13 +1,14 @@
 import React from 'react';
 import styles from './DashboardAdmin.module.css';
 import { useNavigate, Routes, Route } from 'react-router-dom';
-import EventosAdmin from '../pages/EventosAdmin';
-import ProdutosAdmin from '../pages/ProdutosAdmin';
-import NewsletterAdmin from '../pages/NewsletterAdmin';
-import DestaquesAdmin from '../pages/DestaquesAdmin';
-import ParceirosAdmin from '../pages/ParceirosAdmin'; 
 import { FiLogOut } from 'react-icons/fi';
 import { logout } from '../../../../services/auth';
+import EventosAdmin from '../pages/EventosAdmin/EventosAdmin';
+import ProdutosAdmin from '../pages/ProdutosAdmin/ProdutosAdmin';
+import NewsletterAdmin from '../pages/NewsletterAdmin/NewsletterAdmin';
+import DestaquesAdmin from '../pages/DestaquesAdmin/DestaquesAdmin';
+import ParceirosAdmin from '../pages/ParceirosAdmin/ParceirosAdmin';
+
 
 const DashboardAdmin = () => {
   const navigate = useNavigate();

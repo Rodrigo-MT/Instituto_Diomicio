@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styles from './LoginPage.module.css';
-import logo from '../../../src/assets/images/logo_header.png';
+import logo from '../../../assets/images/logo_header.png';
 import { FiArrowLeft } from 'react-icons/fi';
-import api from '../../api';
+import api from '../../../api';
 
 const LoginPage = () => {
     const [username, setUsername] = useState('');

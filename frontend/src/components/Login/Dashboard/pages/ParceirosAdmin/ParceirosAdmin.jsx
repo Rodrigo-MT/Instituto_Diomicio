@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { FiEdit, FiTrash2, FiPlus, FiX } from 'react-icons/fi';
-import styles from '../layout/DashboardAdmin.module.css';
-import api from '../../../../api';
+import styles from '../ParceirosAdmin/ParceirosAdmin.module.css';
+import api from '../../../../../api';
 
 const apiBase = '/partners';
 

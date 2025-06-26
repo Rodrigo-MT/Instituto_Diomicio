@@ -10,14 +10,14 @@ import ApoieNos from './components/ApoieNos/ApoieNos';
 import Noticias from './components/Noticias/Noticias';
 import Footer from './components/Footer/Footer';
 import Maps from './components/Maps/Maps';
-import LoginPage from './components/Login/LoginPage';
-import DashboardAdmin from './components/Login/Dashboard/layout/DashboardAdmin';
-import EventosAdmin from './components/Login/Dashboard/pages/EventosAdmin';
-import ProdutosAdmin from './components/Login/Dashboard/pages/ProdutosAdmin';
-import NewsletterAdmin from './components/Login/Dashboard/pages/NewsletterAdmin';
-import DestaquesAdmin from './components/Login/Dashboard/pages/DestaquesAdmin';
-import ParceirosAdmin from './components/Login/Dashboard/pages/ParceirosAdmin';
+import LoginPage from './components/Login/LoginPage/LoginPage';
 import ProductItem from './components/ApoieNos/Clube/ProductItem';
+import DashboardAdmin from './components/Login/Dashboard/DashboardAdmin/DashboardAdmin';
+import EventosAdmin from './components/Login/Dashboard/pages/EventosAdmin/EventosAdmin';
+import ProdutosAdmin from './components/Login/Dashboard/pages/ProdutosAdmin/ProdutosAdmin';
+import NewsletterAdmin from './components/Login/Dashboard/pages/NewsletterAdmin/NewsletterAdmin';
+import DestaquesAdmin from './components/Login/Dashboard/pages/DestaquesAdmin/DestaquesAdmin';
+import ParceirosAdmin from './components/Login/Dashboard/pages/ParceirosAdmin/ParceirosAdmin';
 
 // Novo componente de proteção de rota simplificado
 const RequireAuth = ({ children }) => {

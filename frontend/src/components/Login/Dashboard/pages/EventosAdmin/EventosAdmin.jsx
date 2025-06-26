@@ -1,7 +1,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { FiX, FiLock, FiUpload, FiImage, FiTrash2, FiEdit } from 'react-icons/fi';
-import styles from '../layout/DashboardAdmin.module.css';
-import api from '../../../../api';
+import styles from '../EventosAdmin/EventosAdmin.module.css';
+import api from '../../../../../api';
 
 const EventosAdmin = () => {
   const [eventos, setEventos] = useState([]);

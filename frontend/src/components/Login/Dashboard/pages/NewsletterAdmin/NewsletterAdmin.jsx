@@ -1,6 +1,6 @@
-import api from '../../../../api';
+import api from '../../../../../api';
 import React, { useEffect, useState } from 'react';
-import styles from '../layout/DashboardAdmin.module.css';
+import styles from '../NewsletterAdmin/NewsletterAdmin.module.css';
 
 const NewsletterAdmin = () => {
   const [subscribers, setSubscribers] = useState([]);

@@ -1,0 +1,371 @@
+/* DestaquesAdmin.module.css */
+:root {
+    --primary-green: #bee7cf;
+    --secondary-green: #f8fcf7;
+    --accent-green: #45b29a;
+    --text-color: #233567;
+    --bg-light: #f9f9f9;
+}
+
+.contentContainer {
+    background-color: white;
+    border-radius: 8px;
+    padding: 2rem;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.actionsContainer {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.generateButton {
+    background-color: #4a6fa5;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.3s;
+}
+
+.generateButton:hover {
+    background-color: #3a5a8f;
+}
+
+.generateButton:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+.noticesContainer {
+    margin-top: 2rem;
+}
+
+.instructions {
+    color: #666;
+    font-size: 0.9rem;
+    margin-bottom: 1rem;
+}
+
+.noticesList {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.noticeCard {
+    background: white;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: all 0.2s ease;
+}
+
+.noticeCard.predefined {
+    border-left: 4px solid #4a6fa5;
+}
+
+.noticeCard:hover {
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.noticeHeader {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    margin-bottom: 1rem;
+}
+
+.noticeOrder {
+    background: #f0f0f0;
+    padding: 0.3rem 0.6rem;
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.9rem;
+}
+
+.noticeImage {
+    margin-bottom: 1rem;
+}
+
+.noticeImage img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 4px;
+    object-fit: cover;
+}
+
+.noticeMeta {
+    margin-bottom: 1.5rem;
+    font-size: 0.9rem;
+}
+
+.noticeMeta p {
+    margin: 0.5rem 0;
+}
+
+.predefinedBadge {
+    display: inline-block;
+    background: #e6f2ff;
+    color: #4a6fa5;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.manualBadge {
+    display: inline-block;
+    background: #f0f0f0;
+    color: #666;
+    padding: 0.2rem 0.5rem;
+    border-radius: 4px;
+    font-size: 0.8rem;
+}
+
+.noticeActions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.emptyState {
+    padding: 2rem;
+    text-align: center;
+    background: #f9f9f9;
+    border-radius: 8px;
+    color: #666;
+}
+
+[data-rbd-drag-handle-context-id] {
+    cursor: grab;
+}
+
+[data-rbd-draggable-context-id] {
+    user-select: none;
+}
+
+[data-rbd-draggable-context-id][data-rbd-draggable-id]:active {
+    cursor: grabbing;
+}
+
+[data-rbd-draggable-context-id][data-rbd-draggable-id]:focus {
+    outline: none;
+}
+
+.modalOverlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+.modalContent {
+    background-color: white;
+    padding: 2rem;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    overflow-y: auto;
+    position: relative;
+    animation: slideUp 0.3s ease;
+}
+
+.modalHeader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding-bottom: 1rem;
+    border-bottom: 1px solid var(--primary-green);
+}
+
+.modalTitle {
+    color: var(--text-color);
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.closeButton {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: none;
+    border: none;
+    font-size: 1.8rem;
+    font-weight: 300;
+    color: var(--text-color);
+    cursor: pointer;
+    transition: color 0.2s;
+    line-height: 1;
+    padding: 0.5rem;
+    margin: -0.5rem;
+}
+
+.closeButton:hover {
+    color: var(--accent-green);
+}
+
+.modalActions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 1rem;
+    margin-top: 2rem;
+    padding-top: 1.5rem;
+    border-top: 1px solid #eee;
+}
+
+.primaryButton {
+    background-color: var(--accent-green);
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.primaryButton:hover {
+    background-color: #3a9e88;
+}
+
+.dangerButton {
+    background-color: #e74c3c;
+    color: white;
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.dangerButton:hover {
+    background-color: #c0392b;
+}
+
+.secondaryButton {
+    background-color: #f5f5f5;
+    color: var(--text-color);
+    border: none;
+    padding: 0.75rem 1.5rem;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s;
+}
+
+.secondaryButton:hover {
+    background-color: #e0e0e0;
+}
+
+.formGroup {
+    margin-bottom: 1.5rem;
+}
+
+.formGroup label {
+    display: block;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+    font-weight: 500;
+}
+
+.formGroup input,
+.formGroup textarea,
+.formGroup select {
+    width: 100%;
+    padding: 0.75rem;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 1rem;
+    transition: border-color 0.2s;
+}
+
+.formGroup input:focus,
+.formGroup textarea:focus,
+.formGroup select:focus {
+    outline: none;
+    border-color: var(--accent-green);
+}
+
+.formGroup textarea {
+    min-height: 100px;
+    resize: vertical;
+}
+
+.loading {
+    padding: 2rem;
+    text-align: center;
+    color: var(--text-color);
+}
+
+.error {
+    color: #d32f2f;
+    padding: 1rem;
+    background-color: #ffebee;
+    border-radius: 4px;
+    margin-bottom: 1rem;
+}
+
+.noticeActions button {
+    padding: 0.5rem 1rem;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: all 0.2s;
+}
+
+.noticeActions .editButton {
+    background-color: var(--accent-green);
+    color: white;
+}
+
+.noticeActions .editButton:hover {
+    background-color: #3a9e88;
+}
+
+.noticeActions .deleteButton {
+    background-color: #ffebee;
+    color: #c62828;
+    border: 1px solid #c62828;
+}
+
+.noticeActions .deleteButton:hover {
+    background-color: #ffcdd2;
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes slideUp {
+    from {
+        transform: translateY(20px);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}

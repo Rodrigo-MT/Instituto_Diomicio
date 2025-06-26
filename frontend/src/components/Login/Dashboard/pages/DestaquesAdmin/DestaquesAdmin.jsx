@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import styles from '../layout/DashboardAdmin.module.css';
+import styles from '../DestaquesAdmin/DestaquesAdmin.module.css';
 import { DragDropContext, Droppable, Draggable } from '@hello-pangea/dnd';
 import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import api from '../../../../api';
+import api from '../../../../../api';
 
 const DestaquesAdmin = () => {
   const [notices, setNotices] = useState([]);
@@ -12,15 +12,14 @@ const DestaquesAdmin = () => {
   const [generating, setGenerating] = useState(false);
   const [reordering, setReordering] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-  const [noticeToDelete, setNoticeToDelete] = useState(null);
+  const [modalType, setModalType] = useState(''); // 'add', 'edit' ou 'delete'
+  const [currentNotice, setCurrentNotice] = useState(null);
   const [form, setForm] = useState({
-    id: null,
     title: '',
     image: '',
     link: '',
-    source: '',
+    source: ''
   });
-  const [setShowReloadMessage] = useState(false);
 
   const fetchNotices = async () => {
     setLoading(true);
@@ -30,6 +29,7 @@ const DestaquesAdmin = () => {
       setError(null);
     } catch (err) {
       setError(err.message || 'Erro desconhecido');
+      toast.error('Falha ao carregar notícias');
     } finally {
       setLoading(false);
     }
@@ -41,7 +41,7 @@ const DestaquesAdmin = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setForm((prev) => ({ ...prev, [name]: value }));
+    setForm(prev => ({ ...prev, [name]: value }));
   };
 
   const handleSubmit = async (e) => {
@@ -52,66 +52,58 @@ const DestaquesAdmin = () => {
       return;
     }
   
-    const payload = {
-      title: form.title,
-      image: form.image,
-      link: form.link,
-      source: form.source,
-    };
-  
-    console.log('Enviando payload:', payload);
-  
     try {
-      let response;
-      if (form.id) {
-        response = await api.put(`/notices/${form.id}`, payload);
+      if (modalType === 'edit') {
+        await api.put(`/notices/${currentNotice.id}`, form);
+        toast.success('Notícia atualizada com sucesso!');
       } else {
-        response = await api.post('/notices', payload);
+        await api.post('/notices', form);
+        toast.success('Notícia adicionada com sucesso!');
       }
-      console.log('Resposta da API:', response.data);
-  
-      setForm({ id: null, title: '', image: '', link: '', source: '' });
+      
       setIsModalOpen(false);
       await fetchNotices();
-      toast.success('Notícia salva com sucesso!');
     } catch (err) {
       console.error('Erro ao salvar notícia:', err);
-      const message = err.response?.data?.message || err.message || 'Erro ao salvar notícia';
-      toast.error(message);
+      toast.error(err.response?.data?.message || err.message || 'Erro ao salvar notícia');
     }
   };
-  
 
-  const openEditModal = (notice = null) => {
-    if (notice) {
-      setForm({
-        id: notice.id,
-        title: notice.title,
-        image: notice.image || '',
-        link: notice.link,
-        source: notice.source || '',
-      });
-    } else {
-      setForm({ id: null, title: '', image: '', link: '', source: '' });
-    }
+  const openAddModal = () => {
+    setForm({
+      title: '',
+      image: '',
+      link: '',
+      source: ''
+    });
+    setModalType('add');
     setIsModalOpen(true);
-    setNoticeToDelete(null);
   };
 
-  const requestDelete = (notice) => {
-    setNoticeToDelete(notice);
+  const openEditModal = (notice) => {
+    setCurrentNotice(notice);
+    setForm({
+      title: notice.title,
+      image: notice.image || '',
+      link: notice.link,
+      source: notice.source || ''
+    });
+    setModalType('edit');
+    setIsModalOpen(true);
+  };
+
+  const openDeleteModal = (notice) => {
+    setCurrentNotice(notice);
+    setModalType('delete');
     setIsModalOpen(true);
   };
 
   const confirmDelete = async () => {
-    if (!noticeToDelete) return;
-
     try {
-      await api.delete(`/notices/${noticeToDelete.id}`);
-      fetchNotices();
+      await api.delete(`/notices/${currentNotice.id}`);
       toast.success('Notícia excluída com sucesso!');
       setIsModalOpen(false);
-      setNoticeToDelete(null);
+      await fetchNotices();
     } catch (err) {
       toast.error(err.message || 'Erro ao excluir notícia');
     }
@@ -119,30 +111,34 @@ const DestaquesAdmin = () => {
 
   const handleDragEnd = async (result) => {
     if (!result.destination) return;
-
+  
+    // Otimistic update - atualiza a UI primeiro
     const items = Array.from(notices);
     const [reorderedItem] = items.splice(result.source.index, 1);
     items.splice(result.destination.index, 0, reorderedItem);
-
+  
     const updatedNotices = items.map((item, index) => ({
       ...item,
       order: index + 1,
     }));
     setNotices(updatedNotices);
-
+  
     try {
       setReordering(true);
+      // CORREÇÃO: Usando o mesmo endpoint e estrutura da versão que funcionava
       const reorderPayload = {
         notices: updatedNotices.map((notice, index) => ({
           id: notice.id,
-          newOrder: index + 1,
+          newOrder: index + 1,  // Mudança chave: usando 'newOrder' em vez de 'order'
         })),
       };
-
-      await api.put('/notices', reorderPayload);
+  
+      // CORREÇÃO: Endpoint correto conforme versão antiga
+      await api.put('/notices', reorderPayload);  // Endpoint diferente do atual
       toast.success('Ordem das notícias atualizada com sucesso!');
     } catch (err) {
       toast.error(err.message || 'Erro ao reordenar notícias');
+      // Restaura o estado anterior em caso de erro
       fetchNotices();
     } finally {
       setReordering(false);
@@ -153,17 +149,12 @@ const DestaquesAdmin = () => {
 
   const handleGenerateSeed = async () => {
     if (!window.confirm('Gerar notícias pré-definidas? Isso não pode ser desfeito.')) return;
+    
     try {
       setGenerating(true);
-      const response = await api.post('/notices/seed', {
-      });
-
-      await new Promise(resolve => setTimeout(resolve, 200));
+      await api.post('/notices/seed');
       await fetchNotices();
-
-      toast.success(`Notícias pré-definidas geradas: ${response.data.length}`);
-      setShowReloadMessage(true);
-      alert('Notícias pré-definidas geradas com sucesso! Por favor, recarregue a página para ver as atualizações.');
+      toast.success('Notícias pré-definidas geradas com sucesso!');
     } catch (err) {
       toast.error(err.message || 'Erro ao gerar notícias');
     } finally {
@@ -174,18 +165,19 @@ const DestaquesAdmin = () => {
   return (
     <div className={styles.contentContainer}>
       <h2 className={styles.sectionTitle}>Destaques do Site</h2>
+      
       <div className={styles.actionsContainer}>
         <button
           onClick={handleGenerateSeed}
           disabled={hasPredefined || generating}
           className={`${styles.button} ${styles.generateButton}`}
-          title={hasPredefined ? 'Já existem notícias pré-definidas no banco' : ''}
+          title={hasPredefined ? 'Já existem notícias pré-definidas' : ''}
         >
           {generating ? 'Gerando...' : 'Gerar Notícias Pré-definidas'}
         </button>
 
         <button
-          onClick={() => openEditModal()}
+          onClick={openAddModal}
           className={styles.primaryButton}
         >
           Adicionar Notícia
@@ -198,7 +190,7 @@ const DestaquesAdmin = () => {
       <div className={styles.noticesContainer}>
         <h3 className={styles.sectionTitle}>Lista de Destaques ({notices.length})</h3>
         <p className={styles.instructions}>
-          Arraste e solte para reordenar as notícias (a primeira será o destaque principal)
+          Arraste e solte para reordenar as notícias
         </p>
 
         {notices.length === 0 && !loading && (
@@ -260,13 +252,13 @@ const DestaquesAdmin = () => {
                         <div className={styles.noticeActions}>
                           <button
                             onClick={() => openEditModal(notice)}
-                            className={styles.editButton}
+                            className={`${styles.button} ${styles.editButton}`}
                           >
                             Editar
                           </button>
                           <button
-                            onClick={() => requestDelete(notice)}
-                            className={styles.deleteButton}
+                            onClick={() => openDeleteModal(notice)}
+                            className={`${styles.button} ${styles.deleteButton}`}
                           >
                             Excluir
                           </button>
@@ -282,24 +274,24 @@ const DestaquesAdmin = () => {
         </DragDropContext>
       </div>
 
+      {/* Modal */}
       {isModalOpen && (
-        <div className={styles.editModalOverlay}>
-          <div className={styles.editModal}>
-            {noticeToDelete ? (
+        <div className={styles.modalOverlay}>
+          <div className={styles.modalContent}>
+            {modalType === 'delete' ? (
               <>
-                <div className={styles.editModalHeader}>
-                  <h3 className={styles.editModalTitle}>Confirmar Exclusão</h3>
+                <div className={styles.modalHeader}>
+                  <h3 className={styles.modalTitle}>Confirmar Exclusão</h3>
                   <button
-                    className={styles.editModalClose}
+                    className={styles.closeButton}
                     onClick={() => setIsModalOpen(false)}
                   >
                     &times;
                   </button>
                 </div>
 
-                <p>Tem certeza que deseja excluir a notícia "{noticeToDelete.title}"?</p>
-                <p>Esta ação não pode ser desfeita.</p>
-
+                <p>Tem certeza que deseja excluir a notícia "{currentNotice.title}"?</p>
+                
                 <div className={styles.modalActions}>
                   <button
                     className={styles.secondaryButton}
@@ -317,12 +309,12 @@ const DestaquesAdmin = () => {
               </>
             ) : (
               <>
-                <div className={styles.editModalHeader}>
-                  <h3 className={styles.editModalTitle}>
-                    {form.id ? 'Editar Notícia' : 'Adicionar Notícia'}
+                <div className={styles.modalHeader}>
+                  <h3 className={styles.modalTitle}>
+                    {modalType === 'edit' ? 'Editar Notícia' : 'Adicionar Notícia'}
                   </h3>
                   <button
-                    className={styles.editModalClose}
+                    className={styles.closeButton}
                     onClick={() => setIsModalOpen(false)}
                   >
                     &times;
@@ -348,6 +340,7 @@ const DestaquesAdmin = () => {
                       name="image"
                       value={form.image}
                       onChange={handleChange}
+                      placeholder="https://exemplo.com/imagem.jpg"
                     />
                   </div>
 
@@ -359,6 +352,7 @@ const DestaquesAdmin = () => {
                       value={form.link}
                       onChange={handleChange}
                       required
+                      placeholder="https://exemplo.com/noticia"
                     />
                   </div>
 
@@ -369,6 +363,7 @@ const DestaquesAdmin = () => {
                       name="source"
                       value={form.source}
                       onChange={handleChange}
+                      placeholder="Nome do jornal/site"
                     />
                   </div>
 
@@ -384,7 +379,7 @@ const DestaquesAdmin = () => {
                       type="submit"
                       className={styles.primaryButton}
                     >
-                      {form.id ? 'Atualizar' : 'Adicionar'}
+                      {modalType === 'edit' ? 'Atualizar' : 'Adicionar'}
                     </button>
                   </div>
                 </form>

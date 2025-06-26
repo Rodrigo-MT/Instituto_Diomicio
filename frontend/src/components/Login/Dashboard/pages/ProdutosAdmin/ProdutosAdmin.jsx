@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { FiEdit, FiTrash2, FiPlus, FiX, FiUpload, FiImage, FiTrash } from 'react-icons/fi';
-import styles from '../layout/DashboardAdmin.module.css';
-import api from '../../../../api';
+import styles from './ProdutosAdmin.module.css';
+import api from '../../../../../api';
 
 const apiBase = '/products'; // já que baseURL está no axios, só o endpoint aqui
 
