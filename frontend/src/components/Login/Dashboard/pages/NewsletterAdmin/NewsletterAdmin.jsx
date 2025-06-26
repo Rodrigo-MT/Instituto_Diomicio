@@ -10,12 +10,13 @@ const NewsletterAdmin = () => {
   const [loading, setLoading] = useState(false);
   const [successMsg, setSuccessMsg] = useState('');
   const [errorMsg, setErrorMsg] = useState('');
-
   const [smtpEmail, setSmtpEmail] = useState('');
   const [smtpPassword, setSmtpPassword] = useState('');
   const [smtpConfigured, setSmtpConfigured] = useState(false);
   const [editingSmtp, setEditingSmtp] = useState(true);
   const [smtpSuccessMsg, setSmtpSuccessMsg] = useState('');
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
 
   useEffect(() => {
     const fetchSmtpConfig = async () => {
@@ -128,6 +129,28 @@ const NewsletterAdmin = () => {
     }
   };
 
+  const handleDeleteSubscribers = async () => {
+    setIsDeleting(true);
+    setErrorMsg('');
+    setSuccessMsg('');
+
+    try {
+      const response = await api.delete('/newsletter/subscribers', {
+        data: { emails: Array.from(selectedEmails) }
+      });
+      
+      setSuccessMsg(response.data.message);
+      const res = await api.get('/newsletter/subscribers');
+      setSubscribers(res.data || []);
+      setSelectedEmails(new Set());
+      setShowDeleteModal(false);
+    } catch (error) {
+      setErrorMsg(error.response?.data?.message || 'Erro ao excluir assinantes');
+    } finally {
+      setIsDeleting(false);
+    }
+  };
+
   return (
     <div className={styles.contentContainer}>
       <h2 className={styles.sectionTitle}>Newsletter</h2>
@@ -209,9 +232,19 @@ const NewsletterAdmin = () => {
         <div className={styles.listSection}>
           <h3>Assinantes ({subscribers.length})</h3>
 
-          <button onClick={toggleSelectAll} className={styles.selectAllBtn}>
-            {selectedEmails.size === subscribers.length ? 'Desmarcar Todos' : 'Marcar Todos'}
-          </button>
+          <div className={styles.subscriberActions}>
+            <button onClick={toggleSelectAll} className={styles.selectAllBtn}>
+              {selectedEmails.size === subscribers.length ? 'Desmarcar Todos' : 'Marcar Todos'}
+            </button>
+            
+            <button 
+              onClick={() => selectedEmails.size > 0 && setShowDeleteModal(true)}
+              disabled={selectedEmails.size === 0}
+              className={styles.deleteButton}
+            >
+              Excluir Selecionados
+            </button>
+          </div>
 
           <ul className={styles.subscriberList}>
             {subscribers.map((sub) => (
@@ -229,6 +262,32 @@ const NewsletterAdmin = () => {
           </ul>
         </div>
       </div>
+
+      {showDeleteModal && (
+        <div className={styles.modalOverlay}>
+          <div className={styles.confirmationModal}>
+            <h3>Confirmar Exclusão</h3>
+            <p>Deseja realmente excluir {selectedEmails.size} assinante(s) selecionado(s)? Esta ação não pode ser desfeita.</p>
+            
+            <div className={styles.modalButtons}>
+              <button 
+                onClick={() => setShowDeleteModal(false)} 
+                className={styles.cancelButton}
+                disabled={isDeleting}
+              >
+                Cancelar
+              </button>
+              <button 
+                onClick={handleDeleteSubscribers} 
+                className={styles.confirmButton}
+                disabled={isDeleting}
+              >
+                {isDeleting ? 'Excluindo...' : 'Confirmar Exclusão'}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
