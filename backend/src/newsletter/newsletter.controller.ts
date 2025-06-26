@@ -1,6 +1,7 @@
 import {
   Body,
   Controller,
+  Delete,
   Get,
   Post,
   UseGuards,
@@ -28,7 +29,7 @@ export class NewsletterController {
   constructor(
     private readonly newsletterService: NewsletterService,
     private readonly configService: NewsletterConfigService,
-  ) {}
+  ) { }
 
   @Get('subscribers')
   @UseGuards(JwtAuthGuard, RolesGuard)
@@ -88,6 +89,18 @@ export class NewsletterController {
   async getConfig() {
     return this.configService.getConfig();
   }
+
+  @Delete('subscribers')
+  @UseGuards(JwtAuthGuard, RolesGuard)
+  @Roles('admin')
+  @ApiBearerAuth()
+  @ApiOperation({ summary: 'Remover assinantes da newsletter' })
+  @ApiResponse({ status: 200, description: 'Assinantes removidos com sucesso.' })
+  @ApiResponse({ status: 401, description: 'Não autorizado.' })
+  async removeSubscribers(@Body() body: { emails: string[] }) {
+    return this.newsletterService.removeSubscribers(body.emails);
+  }
+
 
   @Post('config')
   @UseGuards(JwtAuthGuard, RolesGuard)

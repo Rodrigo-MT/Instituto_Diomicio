@@ -13,7 +13,7 @@ export class NewsletterService {
     @InjectRepository(Newsletter)
     private readonly newsletterRepo: Repository<Newsletter>,
     private readonly encryptionService: EncryptionService,
-  ) {}
+  ) { }
 
   async getAllSubscribers() {
     const all = await this.newsletterRepo.find();
@@ -22,6 +22,19 @@ export class NewsletterService {
       email: this.encryptionService.decrypt(sub.email),
       subscribedAt: sub.subscribedAt,
     }));
+  }
+
+  async removeSubscribers(emails: string[]) {
+    // Criptografa os emails para comparar com os do banco
+    const encryptedEmails = emails.map(email => this.encryptionService.encrypt(email));
+
+    await this.newsletterRepo
+      .createQueryBuilder()
+      .delete()
+      .where("email IN (:...emails)", { emails: encryptedEmails })
+      .execute();
+
+    return { message: `${emails.length} assinante(s) removido(s) com sucesso!` };
   }
 
   async testSMTP(email: string, password: string) {
